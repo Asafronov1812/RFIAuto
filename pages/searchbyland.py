@@ -4,13 +4,11 @@ from pages.searchbysections import SearchBySections
 
 class SearchByLand:
 
-
-
     def __init__(self, driver):
         self.driver = driver
 
     def open(self) :
-        search_by_section = SearchBySections(self)
+        search_by_section = SearchBySections(self.driver)
         search_by_section.open()
         search_by_section.click_button_search_section('1.1. Сведения о земельных участках')
 
@@ -19,7 +17,7 @@ class SearchByLand:
         assert page_title == 'Поиск разделов 1.1'
 
     def click_button_search(self):
-        self.driver.find_element(By.CSS_SELECTOR, '[class="button__content button__content_default button__content_primary"]').click()
+        self.driver.find_element(By.CSS_SELECTOR, 'button[class="button button_default button_primary search-page__button"]').click()
 
     def click_button_reset(self):
         self.driver.find_element(By.CSS_SELECTOR, '[class="button button_default button_secondary search-page__button-secondary"]').click()

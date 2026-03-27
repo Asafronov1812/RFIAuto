@@ -1,16 +1,14 @@
 from selenium.webdriver.common.by import By
-from pages.mainmenu import MainMenu
+from pages.searchbysections import SearchBySections
 
 
-class MainMenu:
-    def __init__(self, driver):
-        self.driver = driver
+def test_search_by_section_is_opened(driver):
+    search_by_section = SearchBySections(driver)
+    search_by_section.open()
+    search_by_section.check_page_is_opened()
 
-    def open(self) :
-        main_menu = MainMenu(self.driver)
-        main_menu.open()
-        main_menu.click_button_select('Поиск по разделам')
-
-    def click_button_section(self, section):
-        self.driver.find_element(By.XPATH, '//div[contains(text(), "' + select + '")]/parent::button').click()menu = MainMenu(self.driver)
+def test_button_search_by_section_1_1(driver):
+    search_by_section = SearchBySections(driver)
+    search_by_section.open()
+    search_by_section.click_button_search_section('1.1. Сведения о земельных участках')
 

@@ -1,5 +1,8 @@
 import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 class HomePage:
 
@@ -13,6 +16,5 @@ class HomePage:
         self.driver.find_element(By.ID, 'kc-login').click()
 
     def click_button_main_menu(self):
-        button_main_menu = self.driver.find_element(By.CLASS_NAME, 'main-menu-item__sub-menu-button')
-        time.sleep(3)
+        button_main_menu = self.driver.find_element(By.CLASS_NAME, 'main-menu-item__sub-menu-button_active')
         button_main_menu.click()
