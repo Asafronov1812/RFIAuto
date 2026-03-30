@@ -8,3 +8,7 @@ def test_home_page_is_open(driver):
     ind = driver.find_element(By.CSS_SELECTOR, 'div[class="dashboard-card calendar-card"] h3').text
     assert ind == 'Календарь событий'
 
+def test_get_token(driver):
+    home_page = HomePage(driver)
+    home_page.open()
+    token = home_page.get_token()

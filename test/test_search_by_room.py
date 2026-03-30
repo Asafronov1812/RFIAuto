@@ -1,19 +1,19 @@
 import time
 import pytest
 from selenium.webdriver.common.by import By
-from pages.searchbyland import SearchByLand
+from pages.searchbyroom import SearchByRoom
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.mark.smoke
-def test_search_by_land_is_opened(driver):
-    search = SearchByLand(driver)
+def test_search_by_room_is_opened(driver):
+    search = SearchByRoom(driver)
     search.open()
     search.check_page_is_opened()
 
 @pytest.mark.smoke
-def test_land_count(driver):
-    search = SearchByLand(driver)
+def test_room_count(driver):
+    search = SearchByRoom(driver)
     search.open()
     search.click_button_search()
     wait = WebDriverWait(driver, 60)

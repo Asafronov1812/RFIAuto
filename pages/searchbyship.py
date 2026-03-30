@@ -5,7 +5,7 @@ from pages.searchbysections import SearchBySections
 from psycopg2.extras import DictCursor
 from psycopg2 import sql
 
-class SearchByLand:
+class SearchByShip:
 
     def __init__(self, driver):
         self.driver = driver
@@ -13,11 +13,11 @@ class SearchByLand:
     def open(self) :
         search_by_section = SearchBySections(self.driver)
         search_by_section.open()
-        search_by_section.click_button_search_section('1.1. Сведения о земельных участках')
+        search_by_section.click_button_search_section('1.4. Сведения о воздушных и морских судах, судах внутреннего плавания')
 
     def check_page_is_opened(self):
         page_title = self.driver.find_element(By.CSS_SELECTOR, 'h1[class="header header_h1 search-filter-block__header"]').text
-        assert page_title == 'Поиск разделов 1.1'
+        assert page_title == 'Поиск разделов 1.4'
 
     def click_button_search(self):
         self.driver.find_element(By.CSS_SELECTOR, 'button[class="button button_default button_primary search-page__button"]').click()
@@ -30,7 +30,7 @@ class SearchByLand:
         with ConnectionsDB.conn.cursor(cursor_factory=DictCursor) as cursor:
             ConnectionsDB.conn.autocommit = True
             try:
-                cursor.execute('SELECT count(*) FROM slice.registry_slice_card_land '
+                cursor.execute('SELECT count(*) FROM slice.registry_slice_card_ship '
                                'WHERE agency_id = %(id)s',
                                {'id': agency_id})
             except Exception:

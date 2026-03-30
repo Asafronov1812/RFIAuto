@@ -1,19 +1,19 @@
 import time
 import pytest
 from selenium.webdriver.common.by import By
-from pages.searchbyland import SearchByLand
+from pages.searchbyship import SearchByShip
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.mark.smoke
-def test_search_by_land_is_opened(driver):
-    search = SearchByLand(driver)
+def test_search_by_ship_is_opened(driver):
+    search = SearchByShip(driver)
     search.open()
     search.check_page_is_opened()
 
 @pytest.mark.smoke
-def test_land_count(driver):
-    search = SearchByLand(driver)
+def test_ship_count(driver):
+    search = SearchByShip(driver)
     search.open()
     search.click_button_search()
     wait = WebDriverWait(driver, 60)
@@ -26,4 +26,4 @@ def test_land_count(driver):
     )
     result_obj_count = driver.find_element(By.CSS_SELECTOR, '[class="counter-block__counter"]').text
     count_from_db = str(search.get_count_of_object_from_db(agency_id='3245240187931858924'))
-    assert result_obj_count == count_from_db
+    assert result_obj_count == count_from_db, 'Количество объектов не совпадает с данными из БД'
