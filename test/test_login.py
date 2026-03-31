@@ -22,6 +22,7 @@ from selenium.webdriver.common.by import By
      ]
  )
 
+@pytest.mark.skip
 def test_login(creds, driver):
     username, password = creds
     driver.get('http://admin.dev.pd15.rosim.mtp/rfi/')

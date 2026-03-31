@@ -1,14 +1,13 @@
-import time
 import pytest
 from selenium.webdriver.common.by import By
-from pages.searchbyroom import SearchByRoom
+from pages.searchbyinvestment import SearchByInvestment
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.pagedata import page_elements as elem
 
 @pytest.mark.smoke
-def test_room_count(driver):
-    search = SearchByRoom(driver)
+def test_investment_count(driver):
+    search = SearchByInvestment(driver)
     search.open()
     search.check_page_is_opened()
     search.click_button_search()
@@ -21,5 +20,5 @@ def test_room_count(driver):
         )
     )
     result_obj_count = driver.find_element(By.CSS_SELECTOR, elem.search_counter_element).text
-    count_from_db = str(search.get_count_of_object_from_db(agency_id='3245240187931858924'))
+    count_from_db = str(search.get_count_of_object_from_db())
     assert result_obj_count == count_from_db, 'Количество объектов не совпадает с данными из БД'

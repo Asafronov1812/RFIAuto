@@ -16,3 +16,7 @@ search_by_sections_title_element = 'h1[class="header header_h1 type-information-
 search_by_sections_title = 'Выберите тип имущества для поиска по разделам'
 search_by_sections_sections = '[class="type-page-item"]'
 search_by_land = '1.1. Сведения о земельных участках'
+
+#
+search_wait_element = 'button[class="button button_default button_primary search-page__button"]'
+search_counter_element = '[class="counter-block__counter"]'

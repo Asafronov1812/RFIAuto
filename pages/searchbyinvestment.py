@@ -1,14 +1,13 @@
 from selenium.webdriver.common.by import By
-
 import ConnectionsDB
 from pages.searchbysections import SearchBySections
 from psycopg2.extras import DictCursor
 from psycopg2 import sql
 
-class SearchByLand:
-    #vars
+class SearchByInvestment:
+    # vars section 2.2
     agency_id = '3245240187931858924'
-    title = 'Поиск разделов 1.1'
+    title = 'Поиск разделов 2.2'
     title_element = 'h1[class="header header_h1 search-filter-block__header"]'
     search_button_element = 'button[class="button button_default button_primary search-page__button"]'
     reset_button_element = '[class="button button_default button_secondary search-page__button-secondary"]'
@@ -19,7 +18,7 @@ class SearchByLand:
     def open(self) :
         search_by_section = SearchBySections(self.driver)
         search_by_section.open()
-        search_by_section.click_button_search_section('1.1. Сведения о земельных участках')
+        search_by_section.click_button_search_section('2.2. Сведения о долях (вкладах) в уставных (складочных) капиталах хозяйственных обществ и товариществ')
 
     def check_page_is_opened(self):
         page_title = self.driver.find_element(By.CSS_SELECTOR, self.title_element).text
@@ -36,7 +35,7 @@ class SearchByLand:
         with ConnectionsDB.conn.cursor(cursor_factory=DictCursor) as cursor:
             ConnectionsDB.conn.autocommit = True
             try:
-                cursor.execute('SELECT count(*) FROM slice.registry_slice_card_land '
+                cursor.execute('SELECT count(*) FROM slice.registry_slice_card_investment '
                                'WHERE agency_id = %(id)s',
                                {'id': agency_id})
             except Exception:

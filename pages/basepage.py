@@ -10,4 +10,4 @@ class BasePage:
 
     def check_page_is_opened(self, title_element, page_title):
         title = self.driver.find_element(By.CSS_SELECTOR, title_element).text
-        assert title == page_title
+        assert title == page_title, "Не удалось открыть страницу"
