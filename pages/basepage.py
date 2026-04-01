@@ -1,15 +1,14 @@
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-
+from page_factory.button import Button
 
 class BasePage:
-    def __init__(self, driver) -> None:
+    def __init__(self, driver, title_locator: tuple, page_title: str) -> None:
         self.driver = driver
-
-    def open(self, url: str = 'current_url'):
-        with allure.step(f'Opening the url "{url}"'):
-            pass
+        self.title_locator = title_locator
+        self.page_title = page_title
+        self.button_main_menu = Button(self.driver, (By.CLASS_NAME, 'main-menu-item__sub-menu-button_active'), 'Кнопка перехода в главное меню')
 
     def visit(self, url: str):
         with allure.step(f'Opening the url "{url}"'):
@@ -19,7 +18,15 @@ class BasePage:
         with allure.step('Reloading the page'):
             self.driver.refresh(wait=WebDriverWait(self.driver, 10))
 
-    def check_page_is_opened(self, title_element, page_title) -> None:
-        with allure.step(f'Checking if page is opened for title "{page_title}"'):
-            title = self.driver.find_element(By.CSS_SELECTOR, title_element).text
-            assert title == page_title, "Не удалось открыть страницу"
+    # def click_button_main_menu(self, name = 'Кнопка перехода в главное меню'):
+    #     with allure.step(f'Clicking the button "{name}"'):
+    #         Button(self.driver, (By.CLASS_NAME, 'main-menu-item__sub-menu-button_active'), name).click()
+
+    # def click_button_main_menu(self):
+    #     with allure.step(f'Clicking the button "{self.button_main_menu.name}"'):
+    #         self.button_main_menu.click()
+
+    def check_page_is_opened(self) -> None:
+        with allure.step(f'Checking if page is opened for title "{self.page_title}"'):
+            title = self.driver.find_element(*self.title_locator).text
+            assert title == self.page_title, "Не удалось открыть страницу"

@@ -1,5 +1,9 @@
+import allure
+import pytest
 from selenium.webdriver.common.by import By
+from page_factory.input import Input
 from pages.basepage import BasePage
+from page_factory.button import Button
 
 
 class HomePage(BasePage):
@@ -8,33 +12,28 @@ class HomePage(BasePage):
     URL = 'http://admin.dev.pd15.rosim.mtp/rfi/'
     JWT_URL = 'http://admin.dev.pd15.rosim.mtp/jwt/'
     JWT_element = 'textarea[name="token"]'
-    button_main_menu_element = 'main-menu-item__sub-menu-button_active'
-    title = 'Календарь событий'
-    title_element = 'div[class="dashboard-card calendar-card"] h3'
 
-    def __init__(self, driver):
-        super().__init__(driver)
+    def __init__(self, driver, title_locator: tuple, page_title: str):
+        super().__init__(driver, title_locator, page_title)
+        self.input_user_name = Input(self.driver, (By.ID, 'username'), 'Имя пользователя')
+        self.input_password = Input(self.driver, (By.ID, 'password'), 'Пароль')
+        self.button_enter = Button(self.driver, (By.ID, 'kc-login'), 'Войти')
 
     def open(self) :
-        self.driver.get(self.URL)
-        self.driver.find_element(By.ID, 'username').send_keys('rfi_user')
-        self.driver.find_element(By.ID, 'password').send_keys('User_5511')
-        self.driver.find_element(By.ID, 'kc-login').click()
-
-    def check_page_is_opened(self, element = title_element, page_title = title):
-        page_title = self.driver.find_element(By.CSS_SELECTOR, element).text
-        assert page_title == self.title, 'Не удалось открыть страницу'
-
-    def click_button_main_menu(self):
-        button_main_menu = self.driver.find_element(By.CLASS_NAME, self.button_main_menu_element)
-        button_main_menu.click()
+        with allure.step(f'Opening the home page at "{self.URL}"'):
+            self.driver.get(self.URL)
+            self.input_user_name.send_keys('rfi_user')
+            self.input_password.send_keys('User_5511')
+            self.button_enter.click()
 
     def update_token(self):
-        self.open()
-        self.driver.get(self.JWT_URL)
-        token = 'Bearer ' + self.driver.find_element(By.CSS_SELECTOR, self.JWT_element).text
-        with open('token.txt', 'w') as file: file.write(token)
+        with allure.step(f'Updating token in file'):
+            self.open()
+            self.driver.get(self.JWT_URL)
+            token = 'Bearer ' + self.driver.find_element(By.CSS_SELECTOR, self.JWT_element).text
+            with open('token.txt', 'w') as file: file.write(token)
 
     def read_token(self):
-        with open("token.txt", "r") as file:
-            return file.read()  # Весь текст в одной строке
+        with allure.step(f'Getting token from file'):
+            with open("token.txt", "r") as file:
+                return file.read()  # Весь текст в одной строке

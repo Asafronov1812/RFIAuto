@@ -19,3 +19,4 @@ class Button(Component):
         with allure.step(f'Double clicking {self.type_of} with name "{self.name}"'):
             locator = self.driver.find_element(*self.locator)
             locator.double_click()
+

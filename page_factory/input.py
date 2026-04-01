@@ -7,7 +7,7 @@ class Input(Component):
     def type_of(self) -> str:
         return 'input'
 
-    def send_keys(self, value: str, validate_value=False):
+    def send_keys(self, value, validate_value=False):
         with allure.step(f'Send keys "{value}" to {self.type_of} "{self.name}"'):
             self.driver.find_element(*self.locator).send_keys(value)
             if validate_value:

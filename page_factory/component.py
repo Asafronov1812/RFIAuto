@@ -3,7 +3,7 @@ import allure
 
 
 class Component(ABC):
-    def __init__(self, driver, locator: str, name: str) -> None:
+    def __init__(self, driver, locator: tuple, name: str = 'Элемент') -> None:
         self.driver = driver
         self.name = name
         self.locator = locator
@@ -12,10 +12,6 @@ class Component(ABC):
     @abstractmethod
     def type_of(self) -> str:
         return 'component'
-
-    # def get_locator(self, **kwargs) :
-    #     locator = self.locator.format(**kwargs)
-    #     return self.page.locator(locator)
 
     def click(self) -> None:
         with allure.step(f'Clicking {self.type_of} with name "{self.name}"'):
