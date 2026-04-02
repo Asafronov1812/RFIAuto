@@ -1,6 +1,5 @@
 import allure
 from selenium.webdriver.common.by import By
-
 from page_factory.button import Button
 from pages.basepage import BasePage
 from pages.mainmenu import MainMenu
@@ -22,6 +21,7 @@ class SearchBySections(BasePage):
         button_locator = (By.XPATH, '//div[contains(text(), "' + section + '")]/parent::div')
         Button(self.driver, button_locator, section).click()
 
-    def check_section_count(self, count: int) -> None:
-        sections = self.driver.find_elements(By.CSS_SELECTOR, '[class="type-page-item"]')
-        assert len(sections) == count
+    def check_section_count(self, count: int = 11) -> None:
+        with allure.step(f'Checking count of sections, must be equal to {count}'):
+            sections = self.driver.find_elements(By.CSS_SELECTOR, '[class="type-page-item"]')
+            assert len(sections) == count, "Количество разделов не соответствует ожиданиям"

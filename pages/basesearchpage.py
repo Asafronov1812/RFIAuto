@@ -39,8 +39,13 @@ class BaseSearchPage(BasePage):
     def section(self) -> str:
         return 'Base'
 
+    @property
+    @abstractmethod
+    def object_type(self) -> str:
+        return 'Base'
+
     def open(self) :
-        with allure.step(f'Opening the search by land page'):
+        with allure.step(f'Opening the search by {self.object_type} page'):
             search_by_sections = SearchBySections(self.driver, *settings.page_search_by_sections_set)
             search_by_sections.open()
             search_by_sections.click_button_search_section(self.section)

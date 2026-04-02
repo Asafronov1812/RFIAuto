@@ -30,5 +30,9 @@ class Component(ABC):
             assert self.driver.find_element(*self.locator).is_clickable()
 
     def should_have_text(self, text, message = 'Нужный текст отсутствует') -> None:
-        with allure.step(f'Checking that {self.type_of} "{self.name}" is enabled'):
+        with allure.step(f'Checking that {self.type_of} "{self.name}" having text "{text}"'):
             assert self.driver.find_element(*self.locator).text == text, message
+
+    def print_inside_html(self) -> None:
+        element = self.driver.find_element(*self.locator)
+        print('\n' + element.get_attribute('innerHTML'))

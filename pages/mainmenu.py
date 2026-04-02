@@ -7,11 +7,6 @@ from pages.homepage import HomePage
 
 class MainMenu(BasePage):
 
-    # main menu
-    main_menu_title_element = 'h1[class="header header_h1 start-page__header"]'
-    main_menu_title = 'Работа с объектами учета'
-    main_menu_sections = (By.CSS_SELECTOR, '[class="start-page-item__button-list-item"]')
-
     def __init__(self, driver, title_locator: tuple, page_title: str):
         super().__init__(driver, title_locator, page_title)
 
@@ -21,9 +16,9 @@ class MainMenu(BasePage):
             home_page.open()
             home_page.button_main_menu.click()
 
-    def check_element_count(self, count):
-        with allure.step(f'Opening the main menu page'):
-            sections = self.driver.find_elements(*self.main_menu_sections)
+    def check_element_count(self, count: int = 11) -> None:
+        with allure.step(f'Checking count of elements, must be equal to {count}'):
+            sections = self.driver.find_elements(By.CSS_SELECTOR, '[class="start-page-item__button-list-item"]')
             assert len(sections) == count
 
     def click_button_select(self, select):
