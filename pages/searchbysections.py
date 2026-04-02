@@ -1,29 +1,27 @@
+import allure
 from selenium.webdriver.common.by import By
+
+from page_factory.button import Button
+from pages.basepage import BasePage
 from pages.mainmenu import MainMenu
+from pages.pagedata import settings
 
-class SearchBySections:
 
-    # search by sections
-    search_by_sections_title_element = 'h1[class="header header_h1 type-information-page__header"]'
-    search_by_sections_title = 'Выберите тип имущества для поиска по разделам'
-    search_by_sections_sections = '[class="type-page-item"]'
-    search_by_land = '1.1. Сведения о земельных участках'
+class SearchBySections(BasePage):
 
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self, driver, title_locator: tuple, page_title: str):
+        super().__init__(driver, title_locator, page_title)
 
     def open(self) :
-        main_menu = MainMenu(self.driver)
-        main_menu.open()
-        main_menu.click_button_select('Поиск по разделам')
+        with allure.step(f'Opening the search by sections page'):
+            main_menu = MainMenu(self.driver, *settings.page_main_menu_set)
+            main_menu.open()
+            main_menu.click_button_select('Поиск по разделам')
 
-    def check_page_is_opened(self, title_element = search_by_sections_title_element, page_title = search_by_sections_title):
-        title = self.driver.find_element(By.CSS_SELECTOR, title_element).text
-        assert title == page_title
+    def click_button_search_section(self, section) -> None:
+        button_locator = (By.XPATH, '//div[contains(text(), "' + section + '")]/parent::div')
+        Button(self.driver, button_locator, section).click()
 
-    def click_button_search_section(self, section):
-        self.driver.find_element(By.XPATH, '//div[contains(text(), "' + section + '")]/parent::div').click()
-
-    def check_section_count(self, count):
-        sections = self.driver.find_elements(By.CSS_SELECTOR, self.search_by_sections_sections)
+    def check_section_count(self, count: int) -> None:
+        sections = self.driver.find_elements(By.CSS_SELECTOR, '[class="type-page-item"]')
         assert len(sections) == count

@@ -3,7 +3,7 @@ import allure
 
 
 class Component(ABC):
-    def __init__(self, driver, locator: tuple, name: str = 'Элемент') -> None:
+    def __init__(self, driver, locator: tuple[str, str], name: str = 'Элемент') -> None:
         self.driver = driver
         self.name = name
         self.locator = locator
@@ -29,6 +29,6 @@ class Component(ABC):
         with allure.step(f'Checking that {self.type_of} "{self.name}" is clickable'):
             assert self.driver.find_element(*self.locator).is_clickable()
 
-    def should_have_text(self, text) -> None:
+    def should_have_text(self, text, message = 'Нужный текст отсутствует') -> None:
         with allure.step(f'Checking that {self.type_of} "{self.name}" is enabled'):
-            assert self.driver.find_element(*self.locator).text == text
+            assert self.driver.find_element(*self.locator).text == text, message

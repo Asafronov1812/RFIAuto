@@ -28,5 +28,4 @@ class MainMenu(BasePage):
 
     def click_button_select(self, select):
         button_locator = (By.XPATH, f'//div[contains(text(), "{select}")]/parent::button')
-        Button(self.driver, *button_locator, select).click()
-        # self.driver.find_element(By.XPATH, '//div[contains(text(), "' + select + '")]/parent::button').click()
+        Button(self.driver, button_locator, select).click()

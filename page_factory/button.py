@@ -1,7 +1,8 @@
 import allure
 from selenium.webdriver.common.action_chains import ActionChains
 from page_factory.component import Component
-
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class Button(Component):
     @property
@@ -20,3 +21,13 @@ class Button(Component):
             locator = self.driver.find_element(*self.locator)
             locator.double_click()
 
+    def wait_for_load(self) -> None:
+        with allure.step(f'Waiting for {self.type_of} with name "{self.name}" to load'):
+            wait = WebDriverWait(self.driver, 60)
+            wait.until_not(
+                EC.text_to_be_present_in_element_attribute(
+                    self.locator,
+                    'class',  # атрибут в котором ожидаем
+                    'button_loading'  # значение атрибута, которое ожидаем, что будет отсутствовать
+                )
+            )

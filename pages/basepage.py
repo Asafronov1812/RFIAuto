@@ -18,14 +18,6 @@ class BasePage:
         with allure.step('Reloading the page'):
             self.driver.refresh(wait=WebDriverWait(self.driver, 10))
 
-    # def click_button_main_menu(self, name = 'Кнопка перехода в главное меню'):
-    #     with allure.step(f'Clicking the button "{name}"'):
-    #         Button(self.driver, (By.CLASS_NAME, 'main-menu-item__sub-menu-button_active'), name).click()
-
-    # def click_button_main_menu(self):
-    #     with allure.step(f'Clicking the button "{self.button_main_menu.name}"'):
-    #         self.button_main_menu.click()
-
     def check_page_is_opened(self) -> None:
         with allure.step(f'Checking if page is opened for title "{self.page_title}"'):
             title = self.driver.find_element(*self.title_locator).text
