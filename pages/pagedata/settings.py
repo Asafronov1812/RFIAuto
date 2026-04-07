@@ -18,3 +18,6 @@ page_search_by_holder_set = ((By.CSS_SELECTOR, 'h1[class="header header_h1 searc
 page_search_by_change_record_set = ((By.CSS_SELECTOR, 'h1[class="header header_h1 search-change-record-page__header"]'), 'Поиск по записям')
 page_search_by_request_set = ((By.CSS_SELECTOR, 'h1[class="header header_h1 search-request-filter-block__header"]'), 'Поиск по запросам')
 page_search_by_rfi_set = ((By.CSS_SELECTOR, 'h1[class="header header_h1 search-federal-property-register-page-filter-block__header"] span'), 'Поиск в Реестре федерального имущества')
+page_excerpt_request_search_set = ((By.CSS_SELECTOR, 'h1[class="header header_h1 rfi-request-filter-block__header"] span'), 'Запросы на предоставление выписок РФИ')
+page_excerpt_request_create_set = ((By.CSS_SELECTOR, 'h1 div'), 'Формирование запроса на предоставление выписок из РФИ')
+page_excerpt_request_set = ((By.CSS_SELECTOR, 'h1 div'), 'Запрос на предоставление выписок из РФИ')

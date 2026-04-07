@@ -1,20 +1,14 @@
 import allure
+from selenium.webdriver.common.action_chains import ActionChains
 from page_factory.component import Component
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
 
 
-class Input(Component):
+class Selector(Component):
     @property
     def type_of(self) -> str:
-        return 'input'
-
-    def send_keys_dir(self, value, validate_value=False):
-        with allure.step(f'Send keys "{value}" to {self.type_of} "{self.name}"'):
-            self.driver.find_element(*self.locator).send_keys(value)
-            if validate_value:
-                self.should_have_value(value)
+        return 'selector'
 
     def send_keys(self, value, validate_value=False):
         with allure.step(f'Send keys "{value}" to {self.type_of} "{self.name}"'):
@@ -33,13 +27,13 @@ class Input(Component):
         with allure.step(f'Clearing {self.type_of} "{self.name}"'):
             self.driver.find_element(*self.locator).clear()
 
-    def wait_for_enable(self) -> None:
-        with allure.step(f'Waiting for {self.type_of} with name "{self.name}" to be enabled.'):
-            wait = WebDriverWait(self.driver, 5)
-            wait.until_not(
+    def wait_for_load(self) -> None:
+        with allure.step(f'Waiting for {self.type_of} with name "{self.name}" to load'):
+            wait = WebDriverWait(self.driver, 60)
+            wait.until(
                 EC.text_to_be_present_in_element_attribute(
                     self.locator,
-                    'class',  # атрибут в котором ожидаем
-                    'react-select--is-disabled'  # значение атрибута, которое ожидаем, что будет отсутствовать
+                    'aria-activedescendant',  # атрибут в котором ожидаем
+                    'react-select-2-option-0'  # значение атрибута, которое ожидаем, что будет отсутствовать
                 )
             )

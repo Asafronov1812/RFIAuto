@@ -1,17 +1,17 @@
-import time
-
+import allure
 import pytest
-from selenium.webdriver.common.keys import Keys
-
-from conftest import driver
 
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с выбором раздела для поиска')
 @pytest.mark.smoke
 def test_search_by_sections(page_search_by_section) :
     page_search_by_section.open()
     page_search_by_section.check_page_is_opened()
     page_search_by_section.check_section_count()
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по земле')
 @pytest.mark.smoke
 def test_search_by_land(page_search_by_land):
     page_search_by_land.open()
@@ -23,6 +23,8 @@ def test_search_by_land(page_search_by_land):
     page_search_by_land.button_reset.click()
     page_search_by_land.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по зданиям')
 @pytest.mark.smoke
 def test_search_by_building(page_search_by_building):
     page_search_by_building.open()
@@ -34,6 +36,8 @@ def test_search_by_building(page_search_by_building):
     page_search_by_building.button_reset.click()
     page_search_by_building.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по помещениям')
 @pytest.mark.smoke
 def test_search_by_room(page_search_by_room):
     page_search_by_room.open()
@@ -45,6 +49,8 @@ def test_search_by_room(page_search_by_room):
     page_search_by_room.button_reset.click()
     page_search_by_room.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по кораблям и самолетам')
 @pytest.mark.smoke
 def test_search_by_ship(page_search_by_ship):
     page_search_by_ship.open()
@@ -56,6 +62,8 @@ def test_search_by_ship(page_search_by_ship):
     page_search_by_ship.button_reset.click()
     page_search_by_ship.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по акциям')
 @pytest.mark.smoke
 def test_search_by_stock(page_search_by_stock):
     page_search_by_stock.open()
@@ -67,6 +75,8 @@ def test_search_by_stock(page_search_by_stock):
     page_search_by_stock.button_reset.click()
     page_search_by_stock.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по инвестициям')
 @pytest.mark.smoke
 def test_search_by_investment(page_search_by_investment):
     page_search_by_investment.open()
@@ -78,6 +88,8 @@ def test_search_by_investment(page_search_by_investment):
     page_search_by_investment.button_reset.click()
     page_search_by_investment.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по движимому имуществу')
 @pytest.mark.smoke
 def test_search_by_movable(page_search_by_movable):
     page_search_by_movable.open()
@@ -89,6 +101,8 @@ def test_search_by_movable(page_search_by_movable):
     page_search_by_movable.button_reset.click()
     page_search_by_movable.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по транспорту')
 @pytest.mark.smoke
 def test_search_by_transport(page_search_by_transport):
     page_search_by_transport.open()
@@ -100,6 +114,8 @@ def test_search_by_transport(page_search_by_transport):
     page_search_by_transport.button_reset.click()
     page_search_by_transport.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по иному движимому имуществу')
 @pytest.mark.smoke
 def test_search_by_other_move(page_search_by_other_move):
     page_search_by_other_move.open()
@@ -111,6 +127,8 @@ def test_search_by_other_move(page_search_by_other_move):
     page_search_by_other_move.button_reset.click()
     page_search_by_other_move.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по долевому участию')
 @pytest.mark.smoke
 def test_search_by_share(page_search_by_share):
     page_search_by_share.open()
@@ -122,6 +140,8 @@ def test_search_by_share(page_search_by_share):
     page_search_by_share.button_reset.click()
     page_search_by_share.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по правообладателям')
 @pytest.mark.smoke
 def test_search_by_holder(page_search_by_holder):
     page_search_by_holder.open()
@@ -133,6 +153,8 @@ def test_search_by_holder(page_search_by_holder):
     page_search_by_holder.button_reset.click()
     page_search_by_holder.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по записям на изменение')
 @pytest.mark.smoke
 def test_search_by_change_record(page_search_by_change_record):
     page_search_by_change_record.open()
@@ -144,6 +166,8 @@ def test_search_by_change_record(page_search_by_change_record):
     page_search_by_change_record.button_reset.click()
     page_search_by_change_record.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по запросам')
 @pytest.mark.smoke
 def test_search_by_request(page_search_by_request):
     page_search_by_request.open()
@@ -155,12 +179,13 @@ def test_search_by_request(page_search_by_request):
     page_search_by_request.button_reset.click()
     page_search_by_request.counter.should_have_text('0', 'Кнопка очистки не сработала')
 
+@allure.feature('Страницы поиска')
+@allure.story('Страница с поиском по реестру федерального имущества')
 @pytest.mark.smoke
 def test_search_by_rfi(page_search_by_rfi):
     page_search_by_rfi.open()
     page_search_by_rfi.check_page_is_opened()
     page_search_by_rfi.input_section_rfi.wait_for_enable()
-    page_search_by_rfi.input_section_rfi.click()
     page_search_by_rfi.input_section_rfi.click()
     page_search_by_rfi.dropdown_section_rfi.click('Раздел 1.1 «Сведения о земельных участках»')
     page_search_by_rfi.input_section_tu.click()

@@ -9,6 +9,9 @@ class MainMenu(BasePage):
 
     def __init__(self, driver, title_locator: tuple, page_title: str):
         super().__init__(driver, title_locator, page_title)
+        self.button_excerpt_request = Button(self.driver,
+                                    (By.CSS_SELECTOR, 'button[class="button button_default button_primary buttons-block-rfi-request-search-page__button"]'),
+                                    'Предоставление выписок из РФИ')
 
     def open(self) :
         with allure.step(f'Opening the main menu page'):

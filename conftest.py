@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
+from pages.excerptrequest import ExcerptRequestSearch, ExcerptRequestCreate, ExcerptRequest
 from pages.pagedata import settings
 from pages.homepage import HomePage
 from pages.mainmenu import MainMenu
@@ -100,7 +101,17 @@ def page_search_by_request(driver):
 def page_search_by_rfi(driver):
     return SearchByRFI(driver, *settings.page_search_by_rfi_set)
 
+@pytest.fixture()
+def page_excerpt_request_search(driver):
+    return ExcerptRequestSearch(driver, *settings.page_excerpt_request_search_set)
 
+@pytest.fixture()
+def page_excerpt_request_create(driver):
+    return ExcerptRequestCreate(driver, *settings.page_excerpt_request_create_set)
+
+@pytest.fixture()
+def page_excerpt_request(driver):
+    return ExcerptRequest(driver, *settings.page_excerpt_request_set)
 
 # фикстура ниже работает на всю сессию тестов, то есть вначале первого и в конце последнего
 # @pytest.fixture(scope='session')

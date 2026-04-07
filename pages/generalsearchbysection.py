@@ -272,7 +272,7 @@ class SearchByRFI(BaseSearchPage):
                                     (By.CSS_SELECTOR, 'button[class="button button_default button_secondary search-federal-property-register-page__button-secondary"]'),
                                     'Сброс')
         self.input_section_rfi = Input(self.driver,
-                                       (By.XPATH, '//*[text()="Раздел РФИ"]/parent::*/following-sibling::div'),
+                                       (By.XPATH, '//*[text()="Раздел РФИ"]/parent::*/following-sibling::div//div[contains(@class, "react-select-container")]'),
                                        'Раздел РФИ')
         self.dropdown_section_rfi = DropDown(self.driver,
                                        (By.CSS_SELECTOR, 'div[class="react-select__menu css-1nmdiq5-menu"]'),
@@ -281,7 +281,7 @@ class SearchByRFI(BaseSearchPage):
                                           (By.XPATH, '//*[text()="Статус раздела"]/parent::*/following-sibling::div'),
                                           'Статус раздела')
         self.input_section_tu = Input(self.driver,
-                                          (By.XPATH, '//*[text()="Территориальный орган Росимущества"]/parent::*/following-sibling::div'),
+                                          (By.XPATH, '//*[text()="Территориальный орган Росимущества"]/parent::*/following-sibling::div//div[contains(@class, "react-select-container")]'),
                                           'Территориальный орган Росимущества')
         self.dropdown_tu = DropDown(self.driver,
                                        (By.CSS_SELECTOR, 'div[class="react-select__menu css-1nmdiq5-menu"]'),

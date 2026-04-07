@@ -21,4 +21,8 @@ class BasePage:
     def check_page_is_opened(self) -> None:
         with allure.step(f'Checking if page is opened for title "{self.page_title}"'):
             title = self.driver.find_element(*self.title_locator).text
-            assert title == self.page_title, "Не удалось открыть страницу или заголовок не совпадает"
+            assert self.page_title in title, "Не удалось открыть страницу или заголовок не совпадает"
+
+    def switch_to_tab(self, tab: int = 1):
+        with allure.step(f'Switching tab to "{tab+1}"'):
+            self.driver.switch_to.window(self.driver.window_handles[tab])

@@ -1,7 +1,7 @@
 from page_factory.component import Component
 
 
-class Counter(Component):
+class InfoField(Component):
     @property
     def type_of(self) -> str:
-        return 'counter'
+        return 'infofield'

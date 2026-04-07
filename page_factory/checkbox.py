@@ -4,17 +4,18 @@ from page_factory.component import Component
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-class Button(Component):
+class CheckBox(Component):
     @property
     def type_of(self) -> str:
-        return 'button'
+        return 'checkbox'
 
-    def hover(self) -> None:
+    def hover(self):
         with allure.step(f'Hovering over {self.type_of} with name "{self.name}"'):
             locator = self.driver.find_element(*self.locator)
             actions = ActionChains(self.driver)
             actions.move_to_element(locator)
-            actions.perform()     #возвращает курсор к центру экрана
+            actions.perform()    #возвращает курсор к центру экрана
+            return actions
 
     def double_click(self) -> None:
         with allure.step(f'Double clicking {self.type_of} with name "{self.name}"'):
@@ -30,11 +31,4 @@ class Button(Component):
                     'class',  # атрибут в котором ожидаем
                     'button_loading'  # значение атрибута, которое ожидаем, что будет отсутствовать
                 )
-            )
-
-    def wait_for_enable(self) -> None:
-        with allure.step(f'Waiting for {self.type_of} with name "{self.name}" to be enabled'):
-            wait = WebDriverWait(self.driver, 5)
-            wait.until_not(
-                EC.element_attribute_to_include(self.locator, 'disabled'),
             )
