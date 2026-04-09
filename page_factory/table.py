@@ -40,7 +40,7 @@ class Table(Component):
             self.driver.find_element(*row).click()
 
     #метод проверяет есть ли объект с тамим параметром в таблице
-    def get_row(self, row: int = 1):
+    def get_row(self, row: int = 1) -> dict:
         with allure.step(f'Getting info from row №"{row}" of {self.type_of} with name "{self.name}"'):
             row_data = {}
             column_names = self.driver.find_elements(By.XPATH, f'{self.locator[1]}//thead//strong')
@@ -51,5 +51,5 @@ class Table(Component):
 
     def checking_row_with_param(self, column_name: str, value: str, row: int = 1) -> None:
         with allure.step(f'Checking that row №{row} of table {self.name} contains {column_name} = {value}'):
-            line = self.get_row()
+            line = self.get_row(row)
             assert line['Номер запроса'] == value

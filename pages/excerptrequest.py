@@ -88,19 +88,19 @@ class ExcerptRequestCreate(BasePage):
 
     def __init__(self, driver, title_locator: tuple, page_title: str):
         super().__init__(driver, title_locator, page_title)
-        self.button_send = Button(self.driver,
+        self.button_send = Button(self.driver,        # кнопка "Направить"
                                     (By.CSS_SELECTOR,
                                      'button[class="button button_default button_primary rfi-control-buttons-block__big-wrapper-button"]'),
                                     'Направить')
-        self.button_cancel = Button(self.driver,
+        self.button_cancel = Button(self.driver,  # кнопка "Отмена"
                                     (By.CSS_SELECTOR,
                                      'div[class="rfi-control-buttons-block"] button[class="button button_default button_secondary"]'),
                                     'Отмена')
-        self.button_cancel_modal = Button(self.driver,
+        self.button_cancel_modal = Button(self.driver,  # кнопка "Отмена" в модалке поиска объектов
                                     (By.CSS_SELECTOR,
                                      'div[class="modal__footer"] button[class="button button_default button_secondary"]'),
                                     'Отмена')
-        self.button_add_object = Button(self.driver,
+        self.button_add_object = Button(self.driver,   # кнопка "Добавить объекты"
                                     (By.CSS_SELECTOR,
                                      'button[class="button button_default button_ghost rfi-request-table__add-applicant"]'),
                                     'Добавить объект запроса')
